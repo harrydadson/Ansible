@@ -1,0 +1,26 @@
+- name: Configure the webservers
+  hosts: webservers
+  roles:
+    - users
+  tasks:
+    # - name: Create a non-root user
+    #   user:
+    #     name: harrydadson
+    #     state: present
+
+    - name: Install nginx
+      package:
+        name: nginx
+        state: present
+
+    - name: Configure the databases
+      hosts: databases
+      become: yes
+      tasks:
+        - name: Install mysql-server
+          package:
+            name: mysql-server
+            state: present
+
+# cmd -> ansible-playbook 02-playbook-master.yaml -i inventory.ini -u root
+        

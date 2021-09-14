@@ -1,0 +1,40 @@
+
+
+- name: Variables...
+  hosts: webservers
+  gather_facts: no
+  vars:
+    ourmap:
+      runtask: true
+      saygoodbye: false
+      a: 1
+      b: [2,3]
+      c: 
+        name: mikec
+        age: 35
+        gender: male
+        # - hello: "world"
+        #   goodbye: "world"
+        # - z: 50
+        #   y: 90
+
+  # roles:
+  #   - users
+  tasks:
+    - debug: # print message to the console
+        msg: " hello, {{ item }} "
+      loop: " {{ b }} "
+      #     " {{ c }} "
+
+    - debug:
+        msg: "hello, {{ item.key }} == {{ item.value }}"
+      loop: "{{ c | dict2items }}"
+
+    - debug:
+        msg: "hello, {{ item.key }} == {{ item.value }}"
+      loop: "{{ c | dict2items }}"
+      when: runtask == true
+         
+
+
+# cmd -> ansible-playbook 08-playbook-loops.yml -i inventory.ini -u root

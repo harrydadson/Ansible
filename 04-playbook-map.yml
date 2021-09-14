@@ -1,0 +1,21 @@
+
+
+- name: Variables...
+  hosts: webservers
+  gather_facts: no
+  vars:
+    ourmap:
+      hello: world
+      goodbye:
+        person: mike
+        cat: joe
+        whale: jeff
+  # roles:
+  #   - users
+  tasks:
+    - debug: # print message to the console
+        msg: " hello: {{ ourmap['hello'] }} , {{ ourmap['goodbye'] }}, {{ ourmap['goodbye']['person'] }}"
+         
+
+
+# cmd -> ansible-playbook 04-playbook-map.yaml -i inventory.ini -u root

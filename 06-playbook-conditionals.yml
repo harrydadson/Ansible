@@ -1,0 +1,26 @@
+
+
+- name: Variables...
+  hosts: webservers
+  gather_facts: no
+  vars:
+    ourmap:
+      runtask: true
+      saygoodbye: false
+      a: 1
+      b: [2,3]
+  # roles:
+  #   - users
+  tasks:
+    - debug: # print message to the console
+        msg: " hello, friend"
+      when: runtask == true # if true
+
+    - debug:
+        msg: "goodbye, friend" 
+      when: saygoodbye == false
+
+         
+
+
+# cmd -> ansible-playbook 04-playbook-map.yaml -i inventory.ini -u root

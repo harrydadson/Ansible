@@ -1,0 +1,28 @@
+
+
+- name: Variables...
+  hosts: webservers
+  gather_facts: no
+  vars:
+    ourmap:
+      runtask: true
+      saygoodbye: false
+      a: 1
+      b: [2,3]
+  # roles:
+  #   - users
+  tasks:
+    - debug: # print message to the console
+        msg: " hello, friend"
+      when: runtask == true and a == 1 # if true
+      #     runtask == true or a == 1 
+      #     (runtask == true and b[0] == 2) or (a == 1)
+
+    - debug:
+        msg: "goodbye, friend" 
+      when: saygoodbye == false
+
+         
+
+
+# cmd -> ansible-playbook 07-playbook-and-or-andor.yaml -i inventory.ini -u root

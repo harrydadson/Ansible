@@ -1,0 +1,20 @@
+
+
+- name: Variables...
+  hosts: webservers
+  gather_facts: no
+  vars:
+    ourlist:
+      - a: 1
+        b: 2
+      - c: 3
+      - d: 4
+  # roles:
+  #   - users
+  tasks:
+    - debug: # print message to the console
+        msg: " hello: {{ ourlist }} , {{ ourlist[1] }}, {{ourlist[2].d}}"
+         
+
+
+# cmd -> ansible-playbook 05-playbook-listMaps.yaml -i inventory.ini -u root

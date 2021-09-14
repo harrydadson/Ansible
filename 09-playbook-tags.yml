@@ -1,0 +1,29 @@
+
+
+- name: Variables...
+  hosts: webservers
+  gather_facts: no
+  vars:
+      c: 
+        name: mikec
+        age: 35
+        gender: male
+  tasks:
+    - debug: # print message to the console
+        msg: " hello, {{ item.key }} "
+      loop: "{{ c | dict2items }}"
+      tags:
+        - hello_key
+        - hello_variable
+
+    - debug:
+        msg: "hello, {{ item.value }} "
+      loop: "{{ c | dict2items }}"
+      tags:
+        - hello_value
+        - hello_variable
+
+    - debug:
+        msg: "hello, world"
+
+# cmd -> ansible-playbook 09-playbook-tags.yml -i inventory.ini -u root --tags=hello_variable
